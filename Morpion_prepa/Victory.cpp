@@ -52,10 +52,6 @@ int Victory::Loose(std::vector<char> playGrid) {
     return 1;
 }
 
-bool Victory::VictoryCheck(std::vector<char> playGrid) {
-    bool victory;
-    victory = Column(playGrid) || Line(playGrid) || Diagonal(playGrid) || Loose(playGrid);
-        std::cout << victory << std::endl;
-    return victory;
-    
+void Victory::VictoryCheck(std::vector<char> playGrid) {
+    state = Column(playGrid) || Line(playGrid) || Diagonal(playGrid) || Loose(playGrid);
 }

@@ -3,21 +3,22 @@
 
 
 GameManager::GameManager() {
+    window.create(sf::VideoMode(WIDTH, HEIGHT), "Online TicTacToe");
 
+    CreateDisplayGrid();
 }
 
 GameManager::~GameManager() {
 
 }
 
-std::vector<char> GameManager::CreatePlayGrid() {
-    std::vector<char> playGrid = { 'n', 'n', 'n',
-                                   'n', 'n', 'n',
-                                   'n', 'n', 'n' };
-    return playGrid;
+void GameManager::CreatePlayGrid() {
+    playGrid = { 'n', 'n', 'n',
+                 'n', 'n', 'n',
+                 'n', 'n', 'n' };
 }
 
-std::vector <sf::RectangleShape*> GameManager::CreateDisplayGrid(std::vector <sf::RectangleShape*> grid) {
+void GameManager::CreateDisplayGrid() {
 
     std::vector<sf::Vector2f> gridLinePos = { {WIDTH / 3 - 5, 10}, {WIDTH / 3 * 2 - 5, 10}, {10,HEIGHT / 3 - 5}, {10,HEIGHT / 3 * 2 - 5}, };
     
@@ -35,20 +36,21 @@ std::vector <sf::RectangleShape*> GameManager::CreateDisplayGrid(std::vector <sf
         grid[i]->setFillColor(sf::Color::Black);
         grid[i]->setPosition(gridLinePos[i]);
     }
-    return grid;
 }
 
-void GameManager::GameLoop(sf::RenderWindow* window, bool victory, int flag, std::vector<char> playGrid, Victory victoryCheck, Draw draw, std::vector <sf::RectangleShape*> grid) {
-    while (window->isOpen())
+void GameManager::GameLoop() {
+    Victory victory;
+    int flag = 0;
+    while (window.isOpen())
     {
         sf::Event event;
-        while (window->pollEvent(event))
+        while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window->close();
+                window.close();
             if (event.type == sf::Event::MouseButtonPressed) {
-                sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-                if (!victory)
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                if (!victory.getState())
                 {
                     //std::cout << "isPlaying" << std::endl;
                     int clickedCell = (int)(mousePos.x / 240) + (int)(mousePos.y / 240) * 3;
@@ -62,33 +64,20 @@ void GameManager::GameLoop(sf::RenderWindow* window, bool victory, int flag, std
                             playGrid[clickedCell] = 'o';
                         }
                     }
-                    victory = victoryCheck.VictoryCheck(playGrid);
+                    victory.VictoryCheck(playGrid);
                 }
-                /*std::cout << (int)(mousePos.x / 240) << "; " << (int)(mousePos.y / 240) << "; " << (int)(mousePos.x / 240) + (int)(mousePos.y / 240) * 3<< std::endl;*/
             }
         }
 
-
-
-        draw.draw(window, grid, playGrid);
+        Draw::draw(&window, grid, playGrid);
     }
 }
 
 int GameManager::GameLaunch()
 {
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML works!");
-    int flag = 0;
-    bool victory = false;
+    CreatePlayGrid();
 
-    Draw draw;
-    Victory victoryCheck;
-
-    std::vector<char> playGrid = CreatePlayGrid();
-
-    std::vector <sf::RectangleShape*> grid;
-    grid=CreateDisplayGrid(grid);
-
-    GameLoop(&window,victory, flag, playGrid, victoryCheck, draw, grid);
+    GameLoop();
 
     return 0;
 }

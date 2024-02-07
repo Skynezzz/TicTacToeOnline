@@ -6,11 +6,15 @@
 class GameManager
 {
 private:
-	std::vector<char> CreatePlayGrid();
-	std::vector <sf::RectangleShape*> CreateDisplayGrid(std::vector <sf::RectangleShape*> grid);
-	void GameLoop(sf::RenderWindow* window, bool victory, int flag, std::vector<char> playGrid, Victory victoryCheck, Draw draw, std::vector <sf::RectangleShape*> grid);
+	sf::RenderWindow window;
+	std::vector <sf::RectangleShape*> grid;
+	std::vector<char> playGrid;
+
+	void CreatePlayGrid();
+	void CreateDisplayGrid();
+	void GameLoop();
 public:
 	GameManager();
-	int GameLaunch();
 	~GameManager();
+	int GameLaunch();
 };
