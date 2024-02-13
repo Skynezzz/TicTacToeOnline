@@ -1,2 +1,4 @@
-﻿  LINK : C:\Users\kfel\Source\Repos\Skynezzz\TicTacToeOnline\x64\Debug\Morpion_prepa.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+﻿  WebDisplay.cpp
+C:\Users\kfel\source\repos\Skynezzz\TicTacToeOnline\Morpion_prepa\WebDisplay.cpp(98,56): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\kfel\source\repos\Skynezzz\TicTacToeOnline\Morpion_prepa\WebDisplay.cpp(36): warning C4715: 'WebDisplay::init' : les chemins de contrôle ne retournent pas tous une valeur
   Morpion_prepa.vcxproj -> C:\Users\kfel\Source\Repos\Skynezzz\TicTacToeOnline\x64\Debug\Morpion_prepa.exe

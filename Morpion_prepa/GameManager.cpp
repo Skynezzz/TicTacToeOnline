@@ -6,6 +6,8 @@ GameManager::GameManager() {
     window.create(sf::VideoMode(WIDTH, HEIGHT), "Online TicTacToe");
 
     CreateDisplayGrid();
+
+    web.init();
 }
 
 GameManager::~GameManager() {
@@ -13,9 +15,9 @@ GameManager::~GameManager() {
 }
 
 void GameManager::CreatePlayGrid() {
-    playGrid = { 'n', 'n', 'n',
-                 'n', 'n', 'n',
-                 'n', 'n', 'n' };
+    playGrid = { 'x', 'o', 'n',
+                 'n', 'x', 'o',
+                 'n', 'o', 'x' };
 }
 
 void GameManager::CreateDisplayGrid() {
@@ -70,6 +72,7 @@ void GameManager::GameLoop() {
         }
 
         Draw::draw(&window, grid, playGrid);
+        web.start(playGrid);
     }
 }
 
