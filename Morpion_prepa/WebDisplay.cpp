@@ -56,7 +56,8 @@ int WebDisplay::start(std::vector<char>* grid) {
 }
 
 std::string WebDisplay::generateTicTacToeHTML(std::vector<char> grid) {
-    std::string html = "<table>";
+    std::string html = "<meta http-equiv=refresh content=1>";
+    html += "<table style = background-color:#FF0000 >";
     for (int i = 0; i < 3; ++i) {
         html += "<tr>";
         for (int j = 0; j < 3; ++j) {
@@ -65,15 +66,15 @@ std::string WebDisplay::generateTicTacToeHTML(std::vector<char> grid) {
             switch (symbol)
             {
             case 'x':
-                html += "<img src = https://www.shutterstock.com/image-vector/letter-x-logogrunge-cross-sign-600nw-1187594722.jpg / >";
+                html += "<img src = https://www.shutterstock.com/image-vector/letter-x-logogrunge-cross-sign-600nw-1187594722.jpg width=200 height=200 / >";
                 break;
 
             case 'o':
-                html += "<img src = https://www.lettresadhesives.net/storage/stickers/rond%20vide%202.png / >";
+                html += "<img src = https://www.lettresadhesives.net/storage/stickers/rond%20vide%202.png width=200 height=200 / >";
                 break;
 
             case 'n':
-                html += "&nbsp";
+                html += "<img src = https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/2048px-Solid_white.svg.png width=200 height=200 / >";
                 break;
 
             default:
@@ -96,7 +97,8 @@ void WebDisplay::handle_request(SOCKET client_socket, std::vector<char> grid) {
         "Content-Length: " + std::to_string(html.size()) + "\r\n"
         "\r\n" + html;
 
-    send(client_socket, response.c_str(), response.size(), 0);
+    send(client_socket, response.c_str(), response.length(), 0);
+    Sleep(100);
     closesocket(client_socket);
-    std::cout << "Done";
+    std::cout << "Done" << std::endl;
 }
