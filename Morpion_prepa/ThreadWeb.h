@@ -6,10 +6,10 @@
 
 class ThreadWeb : public Thread {
 private:
-    std::vector<char> grid;
+    std::vector<char>* grid;
 
 public:
-    ThreadWeb(std::vector<char> grid) : grid(grid) {}
+    ThreadWeb(std::vector<char>* grid) : grid(grid) {}
     virtual void OnThread() {
         WebDisplay webDisplay;
         webDisplay.init();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Windows.h>
+#include "pch.h"
 
 class Thread
 {
@@ -10,7 +10,6 @@ public:
 
 	// INIT 
 	void Init();
-	HANDLE GetHandle() const { return hThread; };
 
 	// THREAD
 	virtual void OnThread() {};

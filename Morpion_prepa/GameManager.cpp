@@ -76,10 +76,12 @@ int GameManager::GameLaunch()
 {
     CreatePlayGrid();
 
-    ThreadWeb webThread(playGrid);
+    ThreadWeb webThread(&playGrid);
     webThread.Init();
     // Attend que le thread se termine
-    WaitForSingleObject(webThread.GetHandle(), INFINITE);
+    // WaitForSingleObject(webThread.GetHandle(), INFINITE);
+
+    Sleep(1000);
 
     GameLoop();
 

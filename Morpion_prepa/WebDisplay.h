@@ -1,10 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <winsock2.h>
 #include <vector>
+#include "pch.h"
 
-#pragma comment(lib, "ws2_32.lib")
 
 class WebDisplay
 {
@@ -18,5 +17,5 @@ private:
 
 public:
     int init();
-    int start(std::vector<char> grid);
+    int start(std::vector<char>* grid);
 };

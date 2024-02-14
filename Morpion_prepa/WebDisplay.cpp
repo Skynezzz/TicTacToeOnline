@@ -35,7 +35,7 @@ int WebDisplay::init()
     std::cout << "Server running on port 80..." << std::endl;
 }
 
-int WebDisplay::start(std::vector<char> grid) {
+int WebDisplay::start(std::vector<char>* grid) {
     for (;;) {
         sockaddr_in client_addr;
         int client_addr_size = sizeof(client_addr);
@@ -47,7 +47,7 @@ int WebDisplay::start(std::vector<char> grid) {
             return 1;
         }
 
-        handle_request(client_socket, grid);
+        handle_request(client_socket, *grid);
     }
 
     closesocket(listen_socket);
@@ -88,6 +88,7 @@ std::string WebDisplay::generateTicTacToeHTML(std::vector<char> grid) {
 }
 
 void WebDisplay::handle_request(SOCKET client_socket, std::vector<char> grid) {
+    std::cout << "Request web : ";
     std::string html = generateTicTacToeHTML(grid);
 
     std::string response = "HTTP/1.1 200 OK\r\n"
@@ -97,4 +98,5 @@ void WebDisplay::handle_request(SOCKET client_socket, std::vector<char> grid) {
 
     send(client_socket, response.c_str(), response.size(), 0);
     closesocket(client_socket);
+    std::cout << "Done";
 }
