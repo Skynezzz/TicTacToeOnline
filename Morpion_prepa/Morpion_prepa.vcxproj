@@ -146,13 +146,18 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Morpion_prepa.cpp" />
     <ClCompile Include="ServerLinker.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="ThreadWeb.cpp" />
     <ClCompile Include="Victory.cpp" />
     <ClCompile Include="WebDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Draw.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="ServerLinker.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="ThreadWeb.h" />
     <ClInclude Include="Victory.h" />
     <ClInclude Include="WebDisplay.h" />
   </ItemGroup>

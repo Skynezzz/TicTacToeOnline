@@ -1,4 +1,3 @@
-
 #include "GameManager.h"
 
 
@@ -6,8 +5,6 @@ GameManager::GameManager() {
     window.create(sf::VideoMode(WIDTH, HEIGHT), "Online TicTacToe");
 
     CreateDisplayGrid();
-
-    web.init();
 }
 
 GameManager::~GameManager() {
@@ -15,9 +12,9 @@ GameManager::~GameManager() {
 }
 
 void GameManager::CreatePlayGrid() {
-    playGrid = { 'x', 'o', 'n',
-                 'n', 'x', 'o',
-                 'n', 'o', 'x' };
+    playGrid = { 'n', 'n', 'n',
+                 'n', 'n', 'n',
+                 'n', 'n', 'n' };
 }
 
 void GameManager::CreateDisplayGrid() {
@@ -72,13 +69,17 @@ void GameManager::GameLoop() {
         }
 
         Draw::draw(&window, grid, playGrid);
-        web.start(playGrid);
     }
 }
 
 int GameManager::GameLaunch()
 {
     CreatePlayGrid();
+
+    ThreadWeb webThread(playGrid);
+    webThread.Init();
+    // Attend que le thread se termine
+    WaitForSingleObject(webThread.GetHandle(), INFINITE);
 
     GameLoop();
 
